@@ -1,9 +1,13 @@
 :root{
   --clr-white: #ffffff;
   --clr-black: #000000;
-
   
-
+  --clr-grey-100: #e0e0e0;
+  --clr-grey-200: #a0a0a0;
+  --clr-grey-300: #808080;
+  --clr-grey-400: #606060;
+  --clr-grey-500: #404040;
+  --clr-grey-600: #202020;
 
   --fs-sm: 0.875rem;  
   --fs-md: 1rem;      
@@ -12,6 +16,30 @@
   --fs-2xl: 1.75rem;  
   --fs-3xl: 2.25rem;  
   --fs-4xl: 3rem;     
+
+  --clr-red: #FF5A5A;
+  --clr-orange: #FF8B5A;
+  --clr-lightOrg: #FFA95A;
+  --clr-yellow: #FFD45A;
+
+  --border-round-sm: 0.5rem;
+  --border-round-md: 1rem;
+  --border-round-lg: 2rem;
+  --border-round-xl: 3rem;
+
+  --shadow-sm: 0.125rem 0.25rem 0.25rem rgba(0, 0, 0, 0.05);
+  --shadow-md: 0.25rem 0.5rem 0.75rem rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0.5rem 1rem 1.5rem rgba(0, 0, 0, 0.25);
+  --shadow-xl: 0.75rem 1.5rem 2rem rgba(0, 0, 0, 0.35);
+
+  
+  /* main styles */
+  --clr-primary: var(--clr-red);
+  --clr-secondary: var(--clr-orange);
+  --clr-accent: var(--clr-yellow);
+
+  --ts-primary: var(--clr-black);
+  --ts-secondary: var(--clr-orange);
 
 
 }

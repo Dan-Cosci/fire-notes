@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams} from 'react-router-dom'
 
+import './Auth.css'
 import LoginForm from '../forms/LoginForm'
 import RegisterForm from '../forms/RegisterForm'
 

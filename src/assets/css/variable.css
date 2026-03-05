@@ -38,8 +38,9 @@
   --clr-secondary: var(--clr-orange);
   --clr-accent: var(--clr-yellow);
 
-  --ts-primary: var(--clr-black);
+  --ts-primary: var(--clr-grey-600);
   --ts-secondary: var(--clr-orange);
+  --ts-muted: var(--clr-grey-400);
 
 
 }

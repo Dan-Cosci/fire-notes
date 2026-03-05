@@ -1,6 +1,10 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
+import App from '../App';
+import Auth from '../pages/Auth';
+import Page404 from '../pages/Page404';
+
 
 const Routes = createBrowserRouter([
   {
@@ -12,14 +16,14 @@ const Routes = createBrowserRouter([
   },
   {
     path:'auth',
-    element:'auth',
+    element: <Auth />,
     children:[
       {}
     ]
   },
   {
     path:'*',
-    element:'404 not found'
+    element:<Page404 />
   }
 ]);
 

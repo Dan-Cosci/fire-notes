@@ -30,7 +30,7 @@ const Auth = () => {
     <div className='auth-body'>
       <div className="auth-card">
         <div className="auth-card-title">
-          <h1>{mode}</h1>
+          <h1>{String(mode).toUpperCase()}</h1>
         </div>
         <form onSubmit={handleSubmit}>
           <AuthForm 

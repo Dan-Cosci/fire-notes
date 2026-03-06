@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams} from 'react-router-dom'
 
 import './Auth.css'
-import LoginForm from '../forms/LoginForm'
-import RegisterForm from '../forms/RegisterForm'
+import AuthForm from '../forms/AuthForm'
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -34,19 +33,15 @@ const Auth = () => {
           <h1>{mode}</h1>
         </div>
         <form onSubmit={handleSubmit}>
-          {mode === 'login'? <LoginForm 
-                              email={email} setEmail={setEmail} 
-                              password={password} setPassword={setPassword}/> 
-                              : 
-                              <RegisterForm 
-                              email={email} setEmail={setEmail} 
-                              password={password} setPassword={setPassword} 
-                              confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} 
-                              displayName={displayName} 
-                              setDisplayName={setDisplayName}
-                              />
-                              }
-          
+          <AuthForm 
+          email={email} setEmail={setEmail} 
+          password={password} setPassword={setPassword} 
+          confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} 
+          displayName={displayName} 
+          setDisplayName={setDisplayName}
+          mode={mode}
+          />
+
         </form>
 
       </div>

@@ -1,0 +1,35 @@
+.auth-pass{
+  display: flex;
+  align-items: center;
+  border: solid 1px var(--clr-lightOrg) ;
+  
+  font-size: var(--fs-lg);
+  padding: .4em 1rem;
+  border-radius: 50rem;
+  
+  color: var(--clr-grey-500);
+}
+
+.auth-input{
+  display: flex;
+  align-items: center;
+  border: solid 1px var(--clr-lightOrg) ;
+  
+  font-size: var(--fs-lg);
+  padding: .4em 1rem;
+  border-radius: 50rem;
+  color: var(--clr-grey-500);
+  width: 100%;
+  
+}
+
+.show {
+  padding:5px;
+  cursor: pointer
+}
+
+input{
+  width: 100%;
+  border: none;
+  outline: none;
+}

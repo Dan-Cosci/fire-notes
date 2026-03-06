@@ -1,17 +1,17 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
-import App from '../App';
 import Auth from '../pages/Auth';
 import Page404 from '../pages/Page404';
+import AppLayout from '../layouts/AppLayout';
 
 
 const Routes = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <AppLayout />,
     children:[
-      {}
+      {path:'home', index:true}
     ]
   },
   {

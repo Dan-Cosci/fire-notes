@@ -1,15 +1,33 @@
 import React from 'react'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 import AuthInput from '../components/authComponents/AuthInput'
 import AuthButton from '../components/authComponents/AuthButton'
 import { FaGoogle } from 'react-icons/fa'
 
+import { auth, GoogleProvider } from '../config/firebase'
+import { signInWithPopup } from 'firebase/auth'
+
+import useAuthStore from '../state/AuthStore'
+
 import './AuthForm.css'
 
 const RegisterForm = ({email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, displayName, setDisplayName, mode}) => {
+  const {setUser} = useAuthStore();
+  const navigate = useNavigate();
+  
   const handleGoogle = (e) => {
     e.preventDefault();
-    console.log('google');
+    signInWithPopup(auth, GoogleProvider)
+      .then((result) => {
+        setUser(result.user)
+        toast.success('Login Successful')
+        navigate('/')
+      })
+      .catch((error) => {
+        toast.error(error.message)
+      })
   }
   
   return (

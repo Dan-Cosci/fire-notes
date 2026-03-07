@@ -1,11 +1,14 @@
 import React from 'react'
-
-import './Dashboard.css'
 import { useNavigate } from 'react-router-dom';
 
-const Dashboard = ({notes}) => {
+import useNoteStore from '../../state/NoteStore';
+
+import './Dashboard.css'
+
+const Dashboard = () => {
 
   const navigate = useNavigate();
+  const { notes } = useNoteStore();
 
 
   const handleClick = (e) =>{

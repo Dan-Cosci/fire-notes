@@ -17,7 +17,7 @@ const RegisterForm = ({email, setEmail, password, setPassword, confirmPassword, 
   const {setUser} = useAuthStore();
   const navigate = useNavigate();
   
-  const handleGoogle = (e) => {
+  const handleGoogleLogin = (e) => {
     e.preventDefault();
     signInWithPopup(auth, GoogleProvider)
       .then((result) => {
@@ -29,7 +29,9 @@ const RegisterForm = ({email, setEmail, password, setPassword, confirmPassword, 
         toast.error(error.message)
       })
   }
+
   
+
   return (
     <>
       {mode === 'register' &&
@@ -62,7 +64,7 @@ const RegisterForm = ({email, setEmail, password, setPassword, confirmPassword, 
       }
       <div className="action">
         <AuthButton type="submit">{mode === 'register' ? 'Register' : 'Login'}</AuthButton>
-        {mode === 'login' && (<AuthButton  onClick={handleGoogle}><FaGoogle /></AuthButton>)}
+        {mode === 'login' && (<AuthButton  onClick={handleGoogleLogin}><FaGoogle /></AuthButton>)}
       </div>
     </>
   )

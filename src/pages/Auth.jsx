@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams} from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+
+import { auth } from '../config/firebase'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import useAuthStore from '../state/AuthStore'
+import AuthForm from '../forms/AuthForm'
 
 import './Auth.css'
-import AuthForm from '../forms/AuthForm'
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -12,6 +17,7 @@ const Auth = () => {
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { setUser } = useAuthStore();
 
   const mode = searchParams.get('mode')
 
@@ -23,7 +29,41 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    if (mode === 'register') {
+      handleRegister(e);
+    } else {
+      handleLogin(e);
+    }
+  }
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setUser(userCredential.user);
+        toast.success('Login Successful');
+        navigate('/');
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  }
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setUser(userCredential.user);
+        toast.success('Registration Successful');
+        navigate('/');
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   }
 
   return (

@@ -27,7 +27,6 @@ const PageView = () => {
     toast.dismiss()
     const loading = toast.loading('saving note');
     setTimeout(() => {
-      console.log(title,content);
       toast.success('Note saved!', { id: loading });
     }, 1000);
   }
@@ -47,6 +46,7 @@ const PageView = () => {
       className="content" 
       contentEditable 
       suppressContentEditableWarning
+      data-placeholder='Write your content here...'
       onInput={(e) => setEditableContent(e.currentTarget.textContent)}
       >{content}</div>
     </div>

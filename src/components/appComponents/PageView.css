@@ -9,6 +9,10 @@
   font-size: var(--fs-4xl);
   outline: none;
   border: none;
+  min-width: clamp(25rem, 60vw, 35rem);
+  text-align: center;
+
+
 
   &:empty:not(:focus)::before {
     content: attr(data-placeholder);
@@ -16,4 +20,17 @@
     pointer-events: none;
   }
 
+}
+
+.content{
+  outline: none;
+  border: none;
+  min-width: clamp(40rem, 80vw, 60rem);
+  min-height: 10rem;
+
+  &:empty:not(:focus)::before {
+    content: attr(data-placeholder);
+    color:var(--clr-grey-100);
+    pointer-events: none;
+  }
 }

@@ -1,0 +1,19 @@
+.note-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title{
+  font-size: var(--fs-4xl);
+  outline: none;
+  border: none;
+
+  &:empty:not(:focus)::before {
+    content: attr(data-placeholder);
+    color:var(--clr-grey-100);
+    pointer-events: none;
+  }
+
+}

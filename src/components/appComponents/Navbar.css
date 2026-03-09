@@ -25,3 +25,15 @@
   }
 
 }
+
+.logo{
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: .25rem;
+
+  & :hover{
+    cursor: pointer;
+    
+  }
+}

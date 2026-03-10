@@ -8,7 +8,10 @@ const useAuthStore = create(persist((set) => ({
   user: null,
   loading: true,
 
-  setUser: (user) => set({ user }),
+  setUser: (user) => {
+    const { uid, email, displayName, photoURL } = user;
+    set({ user : { uid, email, displayName, photoURL } })
+},
   setLoading: (loading) => set({ loading }),
 }), {
   name: 'auth',
@@ -16,8 +19,9 @@ const useAuthStore = create(persist((set) => ({
 
 // Listen to Firebase auth state
 onAuthStateChanged(auth, (user) => {
+
   useAuthStore.setState({
-    user: user || null,
+    user: user ? { uid: user.uid, email: user.email, displayName: user.displayName, photoURL: user.photoURL } : null,
     loading: false,
   });
 });

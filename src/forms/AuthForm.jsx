@@ -9,11 +9,11 @@ import { FaGoogle } from 'react-icons/fa'
 import { auth, GoogleProvider } from '../config/firebase'
 import { signInWithPopup } from 'firebase/auth'
 
-import useAuthStore from '../state/AuthStore'
+import useAuthStore from '../store/AuthStore'
 
 import './AuthForm.css'
 
-const RegisterForm = ({email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, displayName, setDisplayName, mode}) => {
+const AuthForm = ({email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, displayName, setDisplayName, mode}) => {
   const {setUser} = useAuthStore();
   const navigate = useNavigate();
   
@@ -23,7 +23,7 @@ const RegisterForm = ({email, setEmail, password, setPassword, confirmPassword, 
       .then((result) => {
         setUser(result.user)
         toast.success('Login Successful')
-        navigate('/')
+        navigate('/home')
       })
       .catch((error) => {
         toast.error(error.message)
@@ -70,4 +70,4 @@ const RegisterForm = ({email, setEmail, password, setPassword, confirmPassword, 
   )
 }
 
-export default RegisterForm
+export default AuthForm

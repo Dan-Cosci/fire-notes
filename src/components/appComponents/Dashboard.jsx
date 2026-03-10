@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import useNoteStore from '../../state/NoteStore';
+import useNoteStore from '../../store/NoteStore';
 
 import './Dashboard.css'
 

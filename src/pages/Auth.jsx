@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast'
 
 import { auth } from '../config/firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import useAuthStore from '../state/AuthStore'
+import useAuthStore from '../store/AuthStore'
 import AuthForm from '../forms/AuthForm'
 
 import './Auth.css'
@@ -42,7 +42,7 @@ const Auth = () => {
       .then((userCredential) => {
         setUser(userCredential.user);
         toast.success('Login Successful');
-        navigate('/');
+        navigate('/home');
       })
       .catch((error) => {
         toast.error(error.message);

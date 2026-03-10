@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-import useNoteStore from '../../state/NoteStore'
+import useNoteStore from '../../store/NoteStore'
 
 import './PageView.css'
 

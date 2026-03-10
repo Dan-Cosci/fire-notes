@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams} from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 
-import { auth } from '../config/firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import useAuthStore from '../store/AuthStore'
+import AuthService from '../services/firebase/AuthService'
 import AuthForm from '../forms/AuthForm'
 
 import './Auth.css'
@@ -17,7 +15,6 @@ const Auth = () => {
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { setUser } = useAuthStore();
 
   const mode = searchParams.get('mode')
 
@@ -38,15 +35,14 @@ const Auth = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setUser(userCredential.user);
-        toast.success('Login Successful');
-        navigate('/home');
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    AuthService.regularSignIn(email, password)
+    .then(() => {
+      toast.success('Logged in successfully');
+      navigate('/home');
+    })
+    .catch((error) => {
+      toast.error(error.message);
+    });
   }
 
   const handleRegister = (e) => {
@@ -55,15 +51,15 @@ const Auth = () => {
       toast.error('Passwords do not match');
       return;
     }
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setUser(userCredential.user);
-        toast.success('Registration Successful');
-        navigate('/');
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+
+    AuthService.regularSignUp(email, password, displayName)
+    .then(() => {
+      toast.success('Account created successfully');
+      navigate('/home');
+    })
+    .catch((error) => {
+      toast.error(error.message);
+    });
   }
 
   return (

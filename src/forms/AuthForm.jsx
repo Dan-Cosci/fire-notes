@@ -6,9 +6,7 @@ import AuthInput from '../components/authComponents/AuthInput'
 import AuthButton from '../components/authComponents/AuthButton'
 import { FaGoogle } from 'react-icons/fa'
 
-import { auth, GoogleProvider } from '../config/firebase'
-import { signInWithPopup } from 'firebase/auth'
-
+import AuthService from '../services/firebase/AuthService'
 import useAuthStore from '../store/AuthStore'
 
 import './AuthForm.css'
@@ -17,17 +15,12 @@ const AuthForm = ({email, setEmail, password, setPassword, confirmPassword, setC
   const {setUser} = useAuthStore();
   const navigate = useNavigate();
   
-  const handleGoogleLogin = (e) => {
+  const handleGoogleLogin = async (e) => {
     e.preventDefault();
-    signInWithPopup(auth, GoogleProvider)
-      .then((result) => {
-        setUser(result.user)
-        toast.success('Login Successful')
-        navigate('/home')
-      })
-      .catch((error) => {
-        toast.error(error.message)
-      })
+    const u = await AuthService.googleSignIn();
+    setUser(u);
+    toast.success('Login Successful');
+    navigate('/home');
   }
 
   

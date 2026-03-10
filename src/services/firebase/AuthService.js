@@ -1,15 +1,38 @@
-import { auth, db,GoogleProvider } from "../../config/firebase";
+import { auth, db, GoogleProvider } from "../../config/firebase";
 import {  
+  updateProfile,
   signInWithPopup, 
   signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword } from 'firebase/auth';
+  createUserWithEmailAndPassword 
+} from 'firebase/auth';
 
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+
+const createUserDoc = async (user) => {
+  const { uid, email, displayName, photoURL } = user;
+  const userRef = doc(db, 'users', uid);
+  const userSnap = await getDoc(userRef);
+
+  if (!userSnap.exists()) await setDoc(userRef, {
+    uid: uid,
+    email:email,
+    displayName:displayName || '',
+    photoURL: photoURL || '',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    deletedAt: null,
+  });
+
+  return userRef;
+}
 
 const AuthService = {
-  regularSignUp: async (email, password) => {
+  regularSignUp: async (email, password, displayName) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      await updateProfile({ displayName });
+      await createUserDoc(user);
       console.log('User created:', user);
       return user;
     } catch (error) {
@@ -33,6 +56,7 @@ const AuthService = {
     try {
       const result = await signInWithPopup(auth, GoogleProvider);
       const user = result.user;
+      await createUserDoc(user);
       console.log('User signed in with Google:', user);
       return user;
     } catch (error) {
@@ -51,3 +75,5 @@ const AuthService = {
     }
   },
 } 
+
+export default AuthService;

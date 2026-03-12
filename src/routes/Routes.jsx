@@ -9,6 +9,7 @@ import AppLayout from '../layouts/AppLayout';
 import Dashboard from '../components/appComponents/Dashboard'
 import CreateNote from '../components/appComponents/CreateNote'
 import PageView from '../components/appComponents/PageView'
+import Logout from './Logout';
 
 
 const Routes = createBrowserRouter([
@@ -24,6 +25,10 @@ const Routes = createBrowserRouter([
   {
     path:'auth',
     element: <Auth />,
+  },
+  {
+    path:'/logout',
+    element:< Logout/>
   },
   {
     path:'*',

@@ -62,7 +62,7 @@ const Auth = () => {
 
   return (
     <div className='min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-lightOrg via-yellow to-lightOrg bg-[length:400%_400%] animate-[auth-gradient_10s_ease_infinite]'>
-      <div className="flex flex-col items-center p-8 h-[min(25rem,75vh)] w-[min(30rem,30vw,35rem)] bg-white rounded-md">
+      <div className="flex flex-col items-center p-8 bg-white rounded-md">
         <div className="p-5">
           <h1 className="text-2xl font-bold text-grey-600">{String(mode).toUpperCase()}</h1>
         </div>

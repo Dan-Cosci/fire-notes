@@ -1,9 +1,11 @@
 import { auth, db, GoogleProvider } from "../../config/firebase";
 import {  
   updateProfile,
-  signInWithPopup, 
   signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword 
+  signInWithPopup, 
+  getRedirectResult,
+  createUserWithEmailAndPassword, 
+  signInWithRedirect
 } from 'firebase/auth';
 
 import { doc, setDoc, getDoc } from 'firebase/firestore';
@@ -54,13 +56,39 @@ const AuthService = {
 
   googleSignIn: async () => {
     try {
-      const result = await signInWithPopup(auth, GoogleProvider);
-      const user = result.user;
-      await createUserDoc(user);
-      console.log('User signed in with Google:', user);
-      return user;
+      const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+
+      if (isMobile) {
+        // Mobile: use redirect
+        await signInWithRedirect(auth, GoogleProvider);
+        // Result will be handled after redirect in app initialization
+        return null; // cannot return user immediately
+      } else {
+        // Desktop: use popup
+        const result = await signInWithPopup(auth, GoogleProvider);
+        const user = result.user;
+        await createUserDoc(user);
+        console.log("User signed in with Google (desktop):", user);
+        return user;
+      }
     } catch (error) {
-      console.error('Error signing in with Google:', error);
+      console.error("Error signing in with Google:", error);
+      throw error;
+    }
+  },
+
+  handleRedirectResult: async () => {
+    try {
+      const result = await getRedirectResult(auth);
+      if (result && result.user) {
+        const user = result.user;
+        await createUserDoc(user);
+        console.log("User signed in with Google (mobile redirect):", user);
+        return user;
+      }
+      return null; // no redirect result
+    } catch (error) {
+      console.error("Error handling redirect result:", error);
       throw error;
     }
   },

@@ -24,4 +24,3 @@ dist-ssr
 *.sw?
 *.env.local
 .app_spec.md
-.critique.md

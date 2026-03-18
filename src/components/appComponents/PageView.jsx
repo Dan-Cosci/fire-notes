@@ -4,8 +4,6 @@ import toast from 'react-hot-toast';
 
 import useNoteStore from '../../store/NoteStore'
 
-import './PageView.css'
-
 const PageView = () => {
   const { notes } = useNoteStore();
   const params = useParams();
@@ -13,8 +11,8 @@ const PageView = () => {
   const id = params.id;
   const note = notes.find((note) => note.id === id);
 
-  const [title, setTitle] = useState(note.title);
-  const [content, setContent] = useState(note.content);
+  const [title, setTitle] = useState(note?.title || '');
+  const [content, setContent] = useState(note?.content || '');
 
   const [editableTitle, setEditableTitle] = useState(title);
   const [editableContent, setEditableContent] = useState(content)
@@ -33,9 +31,9 @@ const PageView = () => {
 
 
   return (
-    <div className="note-content" onBlur={handleBlur}>
+    <div className="flex flex-col items-center justify-center min-h-[85vh] p-4" onBlur={handleBlur}>
       <div 
-      className="title" 
+      className="text-4xl font-bold outline-none border-none w-full max-w-[35rem] text-center" 
       contentEditable 
       suppressContentEditableWarning
       onInput={(e) => setEditableTitle(e.currentTarget.textContent)}
@@ -43,7 +41,7 @@ const PageView = () => {
       >{title}</div>
 
       <div 
-      className="content" 
+      className="outline-none border-none w-full max-w-[60rem] min-h-40 mt-8" 
       contentEditable 
       suppressContentEditableWarning
       data-placeholder='Write your content here...'

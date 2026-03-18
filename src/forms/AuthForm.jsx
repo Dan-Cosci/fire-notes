@@ -9,8 +9,6 @@ import { FaGoogle } from 'react-icons/fa'
 import AuthService from '../services/firebase/AuthService'
 import useAuthStore from '../store/AuthStore'
 
-import './AuthForm.css'
-
 const AuthForm = ({email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, displayName, setDisplayName, mode}) => {
   const {setUser} = useAuthStore();
   const navigate = useNavigate();
@@ -55,9 +53,9 @@ const AuthForm = ({email, setEmail, password, setPassword, confirmPassword, setC
         onChange={(e) => setConfirmPassword(e.target.value)}
         isPassword={true}/>
       }
-      <div className="action">
+      <div className="w-full flex flex-col items-center justify-center gap-3 mt-auto">
         <AuthButton type="submit">{mode === 'register' ? 'Register' : 'Login'}</AuthButton>
-        {mode === 'login' && (<AuthButton  onClick={handleGoogleLogin}><FaGoogle /></AuthButton>)}
+        {mode === 'login' && (<AuthButton onClick={handleGoogleLogin}><FaGoogle /></AuthButton>)}
       </div>
     </>
   )

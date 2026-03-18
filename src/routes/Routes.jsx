@@ -17,7 +17,7 @@ const Routes = createBrowserRouter([
     path: '/',
     element: <AppLayout />,
     children:[
-      { path:'/home', index:true, element: <Dashboard/> },
+      { path:'/', index:true, element: <Dashboard/> },
       { path:'/create', element: <CreateNote /> },
       { path:'/edit/:id', element: <PageView /> }
     ]

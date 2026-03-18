@@ -1,3 +1,40 @@
-@import url('./reset.css');
-@import url('./typography.css');
-@import url('./variable.css');
+@import "tailwindcss";
+
+@theme {
+  --color-white: #ffffff;
+  --color-black: #000000;
+  
+  --color-grey-50: #fafafa;
+  --color-grey-100: #e0e0e0;
+  --color-grey-200: #a0a0a0;
+  --color-grey-300: #808080;
+  --color-grey-400: #606060;
+  --color-grey-500: #404040;
+  --color-grey-600: #202020;
+
+  --color-primary: #FF5A5A;
+  --color-secondary: #FF8B5A;
+  --color-accent: #FFD45A;
+  --color-lightOrg: #FFA95A;
+  --color-red: #FF5A5A;
+  --color-orange: #FF8B5A;
+  --color-yellow: #FFD45A;
+
+  --shadow-sm: 0.125rem 0.25rem 0.25rem rgba(0, 0, 0, 0.05);
+  --shadow-md: 0.25rem 0.5rem 0.75rem rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0.5rem 1rem 1.5rem rgba(0, 0, 0, 0.25);
+  --shadow-xl: 0.75rem 1.5rem 2rem rgba(0, 0, 0, 0.35);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+
+  --animate-auth-gradient: auth-gradient 10s ease infinite;
+}
+
+@keyframes auth-gradient {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}

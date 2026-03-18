@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-import './AuthInput.css'
-
 const AuthInput = ({isPassword, ...props}) => {
   const [show,setShow] = useState(false);
 
@@ -10,18 +8,18 @@ const AuthInput = ({isPassword, ...props}) => {
   return (
     <>
     {isPassword ? (
-      <div className="auth-pass">
-        <input type={show ? "text" : "password"} {...props} />
-        <div className="show">
+      <div className="flex items-center border border-lightOrg rounded-full text-lg p-2 px-4 text-grey-500 w-full">
+        <input type={show ? "text" : "password"} {...props} className="border-none outline-none w-full" />
+        <div className="p-1 cursor-pointer">
           {show ?
-          <FaEyeSlash size={20} onClick={() => setShow(!show)} className='eye-icon' />
+          <FaEyeSlash size={20} onClick={() => setShow(!show)} />
           :
-          <FaEye size={20} onClick={() => setShow(!show)} className='eye-icon' />}
+          <FaEye size={20} onClick={() => setShow(!show)} />}
         </div>
       </div>
     ) : (
-      <div className="auth-input">
-        <input type="text" {...props} />
+      <div className="flex items-center border border-lightOrg rounded-full text-lg p-2 px-4 text-grey-500 w-full">
+        <input type="text" {...props} className="border-none outline-none w-full" />
       </div>
     )}
     </>

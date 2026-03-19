@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-import useNoteStore from '../../store/NoteStore'
+import useNoteStore from '../store/NoteStore'
 
-const PageView = () => {
+const EditNote = () => {
   const { notes } = useNoteStore();
   const params = useParams();
 
@@ -51,4 +51,4 @@ const PageView = () => {
   )
 }
 
-export default PageView
+export default EditNote

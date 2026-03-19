@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import useNoteStore from '../../store/NoteStore';
+import useNoteStore from '../store/NoteStore';
+import useAuthStore from '../store/AuthStore';
 
 const Dashboard = () => {
 
   const navigate = useNavigate();
-  const { notes } = useNoteStore();
+  const { notes, getNote } = useNoteStore();
+  const user = useAuthStore((state) =>  state.user.uid);
 
+
+  useEffect(() => {
+    console.log(user)
+    getNote(user);
+    console.log('Notes Fetched', notes);
+  },[]
+  )
 
   const handleClick = (e) =>{
     e.preventDefault();

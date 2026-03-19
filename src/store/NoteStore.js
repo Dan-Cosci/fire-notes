@@ -1,17 +1,17 @@
 import { create } from "zustand";
 import { persist  } from "zustand/middleware";
 
+import NoteService from '../services/firebase/NoteService.js'
+
 const useNoteStore = create(persist((set, get) => ({
-  notes: [
-    
-  ],
-  addNote: (note) => set((state) => ({ notes: [...state.notes, note] })),
-  removeNote: (id) => set((state) => ({ notes: state.notes.filter((note) => note.id !== id) })),
-  updateNote: (id, updatedNote) => set((state) => ({ notes: state.notes.map((note) => note.id === id ? { ...note, ...updatedNote } : note) })),
-  getNoteById: (id) => {
-    const { notes } = get();
-    return notes.find((note) => note.id === id);
+  loading: false,
+  setLoading: (loading) => set({ loading }),
+  notes: [],
+  getNote: async (userId) => {
+    const notes = await NoteService.getNotes(userId)
+    set({ notes })
   },
+  
 }), {
   name: 'app',
 }))

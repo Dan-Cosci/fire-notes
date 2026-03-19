@@ -2,14 +2,13 @@ import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
 import Auth from '../pages/Auth';
-
+import Dashboard from '../pages/Dashboard';
+import CreateNote from '../pages/CreateNote';
+import EditNote from '../pages/EditNote';
+import Logout from '../pages/Logout';
 import Page404 from '../pages/Page404';
 
 import AppLayout from '../layouts/AppLayout';
-import Dashboard from '../components/appComponents/Dashboard'
-import CreateNote from '../components/appComponents/CreateNote'
-import PageView from '../components/appComponents/PageView'
-import Logout from './Logout';
 
 
 const Routes = createBrowserRouter([
@@ -19,7 +18,7 @@ const Routes = createBrowserRouter([
     children:[
       { path:'/', index:true, element: <Dashboard/> },
       { path:'/create', element: <CreateNote /> },
-      { path:'/edit/:id', element: <PageView /> }
+      { path:'/edit/:id', element: <EditNote /> }
     ]
   },
   {
@@ -28,7 +27,7 @@ const Routes = createBrowserRouter([
   },
   {
     path:'/logout',
-    element:< Logout/>
+    element:<Logout/>
   },
   {
     path:'*',

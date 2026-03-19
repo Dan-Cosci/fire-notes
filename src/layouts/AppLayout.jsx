@@ -1,13 +1,12 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-import Footer from '../components/Footer'
-import Navbar from '../components/appComponents/Navbar'
+import Navbar from '../components/Navbar'
 
 const AppLayout = () => {
   return (
-    <div className="h-screen flex flex-col bg-red-500">
-      <header className="flex-shrink-0">
+    <div className="h-screen flex flex-col">
+      <header className="shrink-0">
         <Navbar />
       </header>
       <main className="flex-1 overflow-y-auto">

@@ -14,7 +14,7 @@ export default defineConfig({
       'localhost',
       '127.0.0.1',
       '0.0.0.0',
-      '*.ngrok-free.app'
+      '.ngrok-free.app'
     ],
     cors: true,
     strictPort: true,

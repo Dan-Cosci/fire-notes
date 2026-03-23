@@ -20,7 +20,7 @@ const Dashboard = () => {
 
   const handleClick = (e) =>{
     e.preventDefault();
-    navigate(`/edit/${e.target.id}`);
+    navigate(`/edit/${e.key}`);
   }
 
   return (

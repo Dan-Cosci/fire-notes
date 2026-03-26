@@ -31,9 +31,9 @@ const EditNote = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[85vh] p-4" onBlur={handleBlur}>
+    <div className="flex flex-col items-center min-h-screen p-4" onBlur={handleBlur}>
       <div 
-      className="text-4xl font-bold outline-none border-none w-full max-w-[35rem] text-center" 
+      className="text-4xl font-bold outline-none w-full max-w-2/3 text-center border-b-lightOrg border-b pt-4" 
       contentEditable 
       suppressContentEditableWarning
       onInput={(e) => setEditableTitle(e.currentTarget.textContent)}
@@ -41,7 +41,7 @@ const EditNote = () => {
       >{title}</div>
 
       <div 
-      className="outline-none border-none w-full max-w-[60rem] min-h-40 mt-8" 
+      className="outline-none border-none w-full wrap-break-word max-w-3/4 min-h-40 mt-8" 
       contentEditable 
       suppressContentEditableWarning
       data-placeholder='Write your content here...'

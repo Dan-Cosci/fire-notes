@@ -4,11 +4,13 @@ import { persist  } from "zustand/middleware";
 import NoteService from '../services/firebase/NoteService.js'
 
 const useNoteStore = create(persist((set, get) => ({
-  loading: false,
-  setLoading: (loading) => set({ loading }),
   notes: [],
+  loading: false,
+
+  setLoading: (loading) => set({ loading }),
   getNote: async (userId) => {
     const notes = await NoteService.getNotes(userId)
+
     set({ notes })
   },
   

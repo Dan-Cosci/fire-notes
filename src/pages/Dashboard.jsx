@@ -9,6 +9,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { notes, getNote } = useNoteStore();
   const user = useAuthStore((state) =>  state.user.uid);
+  const n = notes;
 
 
   useEffect(() => {
@@ -20,16 +21,16 @@ const Dashboard = () => {
 
   const handleClick = (e) =>{
     e.preventDefault();
-    navigate(`/edit/${e.key}`);
+    navigate(`/edit/${e.currentTarget.id}`);
   }
 
   return (
-    <div className={`bg-grey-50 min-h-[85vh] p-4 md:p-8 ${notes.length > 0 ? 'grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] auto-rows-16 gap-3' : 'flex flex-col items-center justify-center gap-4'}`}>
-      {notes.length > 0 ? notes.map((note) => (
-        <div key={note.id} id={note.id} className="bg-white rounded-md p-4 hover:scale-[1.02] hover:shadow-sm cursor-pointer relative transition-all duration-100" onClick={handleClick}>
+    <div className={`bg-grey-50 min-h-[85vh] p-4 md:p-8 ${n.length > 0 ? 'grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] auto-rows-[15rem] gap-3' : 'flex flex-col items-center justify-center gap-4'}`}>
+      {n.length > 0 ? n.map((note) => (
+        <div key={note.id} id={note.id} className="bg-white h-full flex flex-col rounded-md p-4 hover:scale-[1.02] hover:shadow-sm cursor-pointer relative transition-all duration-100" onClick={handleClick}>
           <h3>{note.title}</h3>
           <p className="text-grey-400 text-sm">{note.content.length > 60 ? note.content.slice(0, 128) + '...' : note.content}</p>
-          <div className="flex justify-between items-center mt-4">
+          <div className="flex justify-between items-center mt-auto m-4">
             <p className="text-xs text-grey-400">created: {new Date(note.createdAt).toLocaleDateString()}</p>
             <p className="text-xs text-grey-400">updated: {new Date(note.updatedAt).toLocaleDateString()}</p>
           </div>

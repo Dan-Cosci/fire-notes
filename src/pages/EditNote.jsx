@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import useNoteStore from '../store/NoteStore'
 
 const EditNote = () => {
-  const { notes } = useNoteStore();
+  const { notes, updateNote } = useNoteStore();
   const params = useParams();
 
   const id = params.id;
@@ -17,16 +17,18 @@ const EditNote = () => {
   const [editableTitle, setEditableTitle] = useState(title);
   const [editableContent, setEditableContent] = useState(content)
 
-  const handleBlur = () => {
+  const handleBlur = async() => {
     
     setContent(editableContent);
     setTitle(editableTitle);
 
+    const updatedNote = { ...note, title: editableTitle, content: editableContent, updatedAt: new Date() };
+
     toast.dismiss()
     const loading = toast.loading('saving note');
-    setTimeout(() => {
+    await updateNote(updatedNote).then(() => {
       toast.success('Note saved!', { id: loading });
-    }, 1000);
+    })
   }
 
 

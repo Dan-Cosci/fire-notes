@@ -10,10 +10,15 @@ const useNoteStore = create(persist((set, get) => ({
   setLoading: (loading) => set({ loading }),
   getNote: async (userId) => {
     const notes = await NoteService.getNotes(userId)
-
     set({ notes })
   },
   
+  updateNote: async (note) => {
+    await NoteService.updateNote(note);
+    get().getNote(note.userId);
+    set({loading: false})
+  },
+
 }), {
   name: 'app',
 }))

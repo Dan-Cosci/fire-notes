@@ -1,5 +1,5 @@
 import { db } from '../../config/firebase.js';
-import { collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 
 const NoteService = {
@@ -21,11 +21,13 @@ const NoteService = {
     const docRef = await addDoc(ref, { ...note, userId });
     return docRef.id;
   },
-  updateNote: async (noteId, updatedNote) => {
-    if (!noteId || !updatedNote) return;
-    const docRef = doc(db, 'notes', noteId);
-    await updateDoc(docRef, updatedNote); 
-    return noteId;
+  updateNote: async (updatedNote) => {
+    if (!updatedNote) return;
+    const docRef = doc(db, 'notes', updatedNote.id);
+    // Exclude the 'id' field when updating the document
+    const { id, ...noteData } = updatedNote;
+    await updateDoc(docRef, noteData); 
+    return { id, ...noteData };
   },
   deleteNote: async (noteId) => {
     if (!noteId) return;
@@ -33,13 +35,6 @@ const NoteService = {
     await deleteDoc(docRef);
     return noteId;
   },
-  getNoteById: async (noteId) => {
-    if (!noteId) return null;
-    const docRef = doc(db, 'notes', noteId);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) return { id: docSnap.id, ...docSnap.data() };
-    return null;
-  }
 }
 
 export default NoteService;

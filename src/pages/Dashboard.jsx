@@ -38,8 +38,8 @@ const Dashboard = () => {
           <h3>{note.title}</h3>
           <p className="text-grey-400 text-sm">{note.content.length > 60 ? note.content.slice(0, 128) + '...' : note.content}</p>
           <div className="flex justify-between items-center mt-auto m-4">
-            <p className="text-xs text-grey-400">created: {new Date(note.createdAt).toLocaleDateString()}</p>
-            <p className="text-xs text-grey-400">updated: {new Date(note.updatedAt).toLocaleDateString()}</p>
+            <p className="text-xs text-grey-400">created: {new Date(note.createdAt?.toDate?.()|| note.createdAt).toLocaleDateString()}</p>
+            <p className="text-xs text-grey-400">updated: {new Date(note.updatedAt?.toDate?.() || note.updatedAt).toLocaleDateString()}</p>
           </div>
         </div>
       )) : <p>No notes found.</p>}

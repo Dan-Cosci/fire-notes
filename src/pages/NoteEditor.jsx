@@ -23,6 +23,7 @@ const NoteEditor = () => {
 
   useEffect(() => {
     if (existingNote) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTitle(existingNote.title);
       setContent(existingNote.content);
       setEditableTitle(existingNote.title);

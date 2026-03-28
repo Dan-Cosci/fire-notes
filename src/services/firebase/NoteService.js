@@ -18,7 +18,7 @@ const NoteService = {
   createNote: async (note, userId) => {
     if (!userId || !note) return;
     const ref = collection(db, 'notes');
-    const docRef = await addDoc(ref, { ...note, userId });
+    const docRef = await addDoc(ref, { ...note, userId, createdAt:new Date() });
     return docRef.id;
   },
   updateNote: async (updatedNote) => {

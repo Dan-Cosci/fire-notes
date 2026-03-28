@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams} from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { FaGoogle } from 'react-icons/fa'
 
+import { urls } from '../routes/urls'
 import AuthService from '../services/firebase/AuthService'
 import AuthInput from '../components/AuthInput'
 import AuthButton from '../components/AuthButton'
@@ -21,8 +22,8 @@ const Auth = () => {
   const mode = searchParams.get('mode')
 
   useEffect(()=>{
-    if (!mode) navigate('/auth?mode=login', {replace: true});
-    if (mode !== 'login' && mode !== 'register') navigate('/auth?mode=login', {replace: true});
+    if (!mode) navigate(`${urls.auth}?mode=login`, {replace: true});
+    if (mode !== 'login' && mode !== 'register') navigate(`${urls.auth}?mode=login`, {replace: true});
   },[mode,navigate]);
 
   const handleGoogleLogin = async (e) => {
@@ -30,7 +31,7 @@ const Auth = () => {
     const u = await AuthService.googleSignIn();
     setUser(u);
     toast.success('Login Successful');
-    navigate('/home');
+    navigate(urls.home);
   }
 
   const handleSubmit = (e) => {
@@ -42,29 +43,29 @@ const Auth = () => {
     }
   }
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    AuthService.regularSignIn(email, password)
+    await AuthService.regularSignIn(email, password)
     .then(() => {
       toast.success('Logged in successfully');
-      navigate('/home');
+      navigate(urls.home);
     })
     .catch((error) => {
       toast.error(error.message);
     });
   }
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
       return;
     }
 
-    AuthService.regularSignUp(email, password, displayName)
+    await AuthService.regularSignUp(email, password, displayName)
     .then(() => {
       toast.success('Account created successfully');
-      navigate('/home');
+      navigate(urls.home);
     })
     .catch((error) => {
       toast.error(error.message);

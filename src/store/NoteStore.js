@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist  } from "zustand/middleware";
 
 import NoteService from '../services/firebase/NoteService.js'
+import useAuthStore from './AuthStore.js';
 
 const useNoteStore = create(persist((set, get) => ({
   notes: [],
@@ -17,6 +18,14 @@ const useNoteStore = create(persist((set, get) => ({
     await NoteService.updateNote(note);
     get().getNote(note.userId);
     set({loading: false})
+  },
+
+  createNote: async (note) => {
+    const userId = useAuthStore.getState().user?.uid;
+    if (!userId) return null;
+    const noteId = await NoteService.createNote(note, userId);
+    await get().getNote(userId);
+    return noteId;
   },
 
 }), {

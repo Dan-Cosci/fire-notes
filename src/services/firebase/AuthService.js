@@ -33,7 +33,7 @@ const AuthService = {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      await updateProfile({ displayName });
+      await updateProfile(user, { displayName });
       await createUserDoc(user);
       console.log('User created:', user);
       return user;

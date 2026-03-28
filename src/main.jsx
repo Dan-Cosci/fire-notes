@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 
-import Routes from './routes/Routes'
+import { Routes } from './routes/Routes'
 
 import './assets/css/main.css'
 

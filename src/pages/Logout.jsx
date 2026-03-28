@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../config/firebase'
+import { urls } from '../routes/urls'
 
 const Logout = () => {
   const navigate = useNavigate()
@@ -9,7 +10,7 @@ const Logout = () => {
     const handleLogout = async () => {
       try {
         await auth.signOut()
-        navigate('/auth?mode=login', { replace: true })
+        navigate(`${urls.auth}?mode=login`, { replace: true })
       } catch (error) {
         console.error('Logout error:', error)
       }

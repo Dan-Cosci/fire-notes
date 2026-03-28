@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom';
+import { urls } from '../routes/urls';
 import useAuthStore from '../store/AuthStore';
 import { FaUser } from 'react-icons/fa6';
 
@@ -15,7 +16,7 @@ const Navbar = () => {
 
   return (
     <nav className="flex items-center justify-between px-5 py-3 lg:px-10 lg:py-4 bg-lightOrg shadow-sm">
-      <div className="flex items-center gap-1 cursor-pointer" onClick={() => navigate('/')}>
+      <div className="flex items-center gap-1 cursor-pointer" onClick={() => navigate(urls.home)}>
         <img src={icon} height={40} width={40} alt="pencil on fire" className="h-10 w-10" />
         <h1 className="text-2xl font-bold text-white sm:block hidden">NoteFlow</h1>
       </div>

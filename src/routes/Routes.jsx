@@ -1,38 +1,35 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
+import { urls } from './urls'
 import Auth from '../pages/Auth';
 import Dashboard from '../pages/Dashboard';
-import CreateNote from '../pages/CreateNote';
-import EditNote from '../pages/EditNote';
+import NoteEditor from '../pages/NoteEditor';
 import Logout from '../pages/Logout';
 import Page404 from '../pages/Page404';
 
 import AppLayout from '../layouts/AppLayout';
 
-
-const Routes = createBrowserRouter([
+export const Routes = createBrowserRouter([
   {
-    path: '/',
+    path: urls.home,
     element: <AppLayout />,
     children:[
-      { path:'/', index:true, element: <Dashboard/> },
-      { path:'/create', element: <CreateNote /> },
-      { path:'/edit/:id', element: <EditNote /> }
+      { path: urls.home, index:true, element: <Dashboard/> },
+      { path: urls.create, element: <NoteEditor /> },
+      { path: urls.edit, element: <NoteEditor /> }
     ]
   },
   {
-    path:'auth',
+    path: urls.auth,
     element: <Auth />,
   },
   {
-    path:'/logout',
-    element:<Logout/>
+    path: urls.logout,
+    element: <Logout/>
   },
   {
-    path:'*',
-    element:<Page404 />
+    path: urls.page404,
+    element: <Page404 />
   }
 ]);
-
-export default Routes

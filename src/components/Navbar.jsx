@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { urls } from '../routes/urls';
 import useAuthStore from '../store/AuthStore';
+import useNoteStore from '../store/NoteStore';
 import { FaUser } from 'react-icons/fa6';
 
 import icon from '../assets/images/icon-large.png'
@@ -11,8 +12,14 @@ const Navbar = () => {
 
   const [ search, setSearch ] = useState('');
   const [ showModal, setShowModal ] = useState(false);
+  const { setSearchQuery } = useNoteStore();
   const { user } = useAuthStore();
   const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    setSearchQuery(e.target.value);
+  }
 
   return (
     <nav className="flex items-center justify-between px-5 py-3 lg:px-10 lg:py-4 bg-lightOrg shadow-sm">
@@ -24,11 +31,10 @@ const Navbar = () => {
       <div className="flex-1 max-w-2xl mx-8">
         <input 
           value={search}
-          onChange={(e)=>setSearch(e.target.value)}
+          onChange={handleSearch}
           type='text' 
-          placeholder='Search'
+          placeholder='Search notes...'
           className="w-full p-2 bg-grey-50 rounded-md border border-grey-100 focus:outline-none focus:border-primary"
-          onKeyDown={(e) => { if (e.key === 'Enter') { console.log(search) } }} 
         />
       </div>
 

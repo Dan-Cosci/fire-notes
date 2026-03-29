@@ -7,6 +7,19 @@ import useAuthStore from './AuthStore.js';
 const useNoteStore = create(persist((set, get) => ({
   notes: [],
   loading: false,
+  searchQuery: '',
+
+  setSearchQuery: (query) => set({ searchQuery: query }),
+  
+  getFilteredNotes: () => {
+    const { notes, searchQuery } = get();
+    if (!searchQuery.trim()) return notes;
+    const query = searchQuery.toLowerCase();
+    return notes.filter(note => 
+      note.title?.toLowerCase().includes(query) ||
+      note.content?.toLowerCase().includes(query)
+    );
+  },
 
   setLoading: (loading) => set({ loading }),
   getNote: async (userId) => {
@@ -30,6 +43,11 @@ const useNoteStore = create(persist((set, get) => ({
 
 }), {
   name: 'app',
+  partialize: (state) => ({
+    notes: state.notes,
+    loading: state.loading,
+    searchQuery: state.searchQuery,
+  }),
 }))
 
 export default useNoteStore

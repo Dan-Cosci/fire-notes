@@ -9,16 +9,14 @@ import { urls } from '../routes/urls';
 const Dashboard = () => {
 
   const navigate = useNavigate();
-  const { notes, getNote } = useNoteStore();
+  const { getNote, getFilteredNotes } = useNoteStore();
   const user = useAuthStore((state) =>  state.user.uid);
-  const n = notes;
+  const n = getFilteredNotes();
 
 
   useEffect(() => {
-    console.log(user)
     getNote(user);
-    console.log('Notes Fetched', notes);
-  },[]
+  },[user, getNote]
   )
 
   const handleClick = (e) =>{

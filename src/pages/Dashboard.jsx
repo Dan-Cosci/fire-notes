@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaTrash } from 'react-icons/fa';
 
 import useNoteStore from '../store/NoteStore';
 import useAuthStore from '../store/AuthStore';
@@ -9,7 +9,7 @@ import { urls } from '../routes/urls';
 const Dashboard = () => {
 
   const navigate = useNavigate();
-  const { getNote, getFilteredNotes } = useNoteStore();
+  const { getNote, getFilteredNotes, setShowModal } = useNoteStore();
   const user = useAuthStore((state) =>  state.user.uid);
   const n = getFilteredNotes();
 
@@ -24,6 +24,12 @@ const Dashboard = () => {
     navigate(urls.edit.replace(':id', e.currentTarget.id));
   }
 
+  const handleDelete = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowModal();
+  }
+
   const handleAdd = (e) => {
     e.preventDefault();
     navigate(urls.add);
@@ -36,8 +42,9 @@ const Dashboard = () => {
           <h3>{note.title}</h3>
           <p className="text-grey-400 text-sm">{note.content.length > 60 ? note.content.slice(0, 128) + '...' : note.content}</p>
           <div className="flex justify-between items-center mt-auto m-4">
-            <p className="text-xs text-grey-400">created: {new Date(note.createdAt?.toDate?.()|| note.createdAt).toLocaleDateString()}</p>
+            {/* <p className="text-xs text-grey-400">created: {new Date(note.createdAt?.toDate?.()|| note.createdAt).toLocaleDateString()}</p> */}
             <p className="text-xs text-grey-400">updated: {new Date(note.updatedAt?.toDate?.() || note.updatedAt).toLocaleDateString()}</p>
+            <FaTrash onClick={handleDelete}/>
           </div>
         </div>
       )) : <p>No notes found.</p>}

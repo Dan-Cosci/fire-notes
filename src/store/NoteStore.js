@@ -7,10 +7,13 @@ import useAuthStore from './AuthStore.js';
 const useNoteStore = create(persist((set, get) => ({
   notes: [],
   loading: false,
+  showModal: false,
   searchQuery: '',
 
   setSearchQuery: (query) => set({ searchQuery: query }),
-  
+  setShowModal: () => set((state) => ({ showModal: !state.showModal })),
+
+
   getFilteredNotes: () => {
     const { notes, searchQuery } = get();
     if (!searchQuery.trim()) return notes;

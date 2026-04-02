@@ -17,7 +17,7 @@ const AppLayout = () => {
 
   return (
     <div className="h-screen flex flex-col">
-      {showModal && <DeleteModal handleCancel={handleCancel} />}
+      {showModal && <DeleteModal handleCancel={handleCancel} handleDelete={() => {}} />}
       <header className="shrink-0">
         <Navbar />
       </header>

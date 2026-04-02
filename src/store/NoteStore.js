@@ -6,10 +6,12 @@ import useAuthStore from './AuthStore.js';
 
 const useNoteStore = create(persist((set, get) => ({
   notes: [],
+  noteToDelete: null,
   loading: false,
   showModal: false,
   searchQuery: '',
 
+  setNoteToDelete: (note) => set({ noteToDelete: note }),
   setSearchQuery: (query) => set({ searchQuery: query }),
   setShowModal: () => set((state) => ({ showModal: !state.showModal })),
 
@@ -42,6 +44,11 @@ const useNoteStore = create(persist((set, get) => ({
     const noteId = await NoteService.createNote(note, userId);
     await get().getNote(userId);
     return noteId;
+  },
+
+  deleteNote: async () => {
+    await NoteService.deleteNote(get().noteToDelete);
+    get().getNote(useAuthStore.getState().user?.uid);
   },
 
 }), {

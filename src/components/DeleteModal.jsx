@@ -13,8 +13,8 @@ const DeleteModal = ({handleDelete, handleCancel}) => {
           <p>are you sure you would like to delete this note?</p>
         </div>
         <div className='flex w-full gap-4'>
-          <button onClick={handleCancel} className='bg-gray-300 px-4 py-2 rounded w-full'>no</button>
-          <button onClick={handleDelete} className='bg-red-500 text-white px-4 py-2 rounded w-full'>yes</button>
+          <button onClick={handleCancel} className='bg-gray-300 px-4 py-2 rounded w-full hover:bg-gray-400 active:opacity-80'>no</button>
+          <button onClick={handleDelete} className='bg-red-500 text-white px-4 py-2 rounded w-full hover:bg-red-600 active:opacity-80'>yes</button>
         </div>
       </div>
     </div>

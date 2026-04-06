@@ -10,12 +10,13 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
   const { getNote, getFilteredNotes, setShowModal, setNoteToDelete } = useNoteStore();
-  const user = useAuthStore((state) =>  state.user.uid);
+  const user = useAuthStore((state) =>  state.user);
   const n = getFilteredNotes();
 
 
   useEffect(() => {
-    getNote(user);
+    if (!user?.uid) return;
+    getNote(user.uid);
   },[user, getNote]
   )
 

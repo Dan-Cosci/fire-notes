@@ -9,7 +9,7 @@ const useNoteStore = create(persist((set, get) => ({
   noteToDelete: null,
   loading: false,
   showModal: false,
-  searchQuery: '',
+  searchQuery: ' ',
 
   setNoteToDelete: (note) => set({ noteToDelete: note }),
   setSearchQuery: (query) => set({ searchQuery: query }),
@@ -28,7 +28,9 @@ const useNoteStore = create(persist((set, get) => ({
 
   setLoading: (loading) => set({ loading }),
   getNote: async (userId) => {
+    console.log('i works')
     const notes = await NoteService.getNotes(userId)
+    console.log(notes);
     set({ notes })
   },
   

@@ -9,7 +9,7 @@ import { urls } from '../routes/urls';
 const Dashboard = () => {
 
   const navigate = useNavigate();
-  const { getNote, getFilteredNotes, setShowModal, noteToDelete } = useNoteStore();
+  const { getNote, getFilteredNotes, setShowModal, setNoteToDelete } = useNoteStore();
   const user = useAuthStore((state) =>  state.user.uid);
   const n = getFilteredNotes();
 
@@ -24,9 +24,10 @@ const Dashboard = () => {
     navigate(urls.edit.replace(':id', e.currentTarget.id));
   }
 
-  const handleDelete = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDelete = (note, e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setNoteToDelete(note.id);
     setShowModal();
   }
 
@@ -45,7 +46,7 @@ const Dashboard = () => {
             {/* <p className="text-xs text-grey-400">created: {new Date(note.createdAt?.toDate?.()|| note.createdAt).toLocaleDateString()}</p> */}
             <p className="text-xs text-grey-400">updated: {new Date(note.updatedAt?.toDate?.() || note.updatedAt).toLocaleDateString()}</p>
             <p className="text-lg text-grey-400 cursor-pointer hover:text-red ">
-              <FaTrash onClick={handleDelete}/>
+              <FaTrash onClick={(e) => handleDelete(note, e)}/>
             </p>
           </div>
         </div>
